@@ -1,3 +1,5 @@
+//Pseudo code for calculator from FreeCodeCamp
+
 //HTML 
 //Create calculator class to define the look of the calculator
 //.calculator 
