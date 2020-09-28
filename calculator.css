@@ -13,7 +13,7 @@
 .calculator_body { 
   display: grid; 
   padding: 2vw 2vw;
-  margin: 20vw 25vw 25vw 20vw;
+  margin: 5vw 25vw 25vw 20vw;
   border-radius: 10%;
   border-style: outset;
   background-color: #fdf6df;
