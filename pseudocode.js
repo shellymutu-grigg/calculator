@@ -1,4 +1,4 @@
-//Pseudo code for calculator from FreeCodeCamp
+//Pseudo code for calculator from FreeCodeCamp for first draft
 
 //HTML 
 //Create calculator class to define the look of the calculator
