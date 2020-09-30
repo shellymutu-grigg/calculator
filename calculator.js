@@ -1,90 +1,148 @@
-//JS
-//Define global variables
-//Use JQuery to determine action onclick of a button
-//Check if the input is a number or not and if OK add to the temp string variable
-//Use JQuery to assign to the answer element in HTML using the .val
-//Check for selection of either AC or CE buttons and empty answer element
-//Define multiply functionality using text versus mathematical operator
-//Define division functionality using text versus mathematical operator
-//Define equals functionality
-//  using addition
-//  using minus
-//  using multiplication
-//  using division
-//Cater for - symbol
-
-document.addEventListener('DOMContentLoaded', startCalculator)
+/*
+# JS
+# Define global variables
+# Action onclick of a button
+# Check if the input is a number or not and if OK add to the temp string variable
+# Assign to the calculator_output element in HTML
+# Check for selection of either AC or CE buttons and empty answer element
+# Cater for special symbols and use correct mathematical operators
+# Define equals functionality
+*/
 
 /*
 # Global variables
 */
-var answer = ""
+var answer = []
 
 /*
-# Initiate game
+# Assess button click
 */
-function startCalculator(){
-  
-}
+
 function calculate(value){
-  console.log("calculate(): value:" + value)
-  var isInteger = Number.isInteger(value)
+  var temp =""
   if(Number.isInteger(parseInt(value)) || value === "."){
-    answer += value
-    console.log("value is Int or . : " + value)
-    document.getElementById("calculator_output").innerHTML = answer.toString()
+    if((value === "." && !answer.includes("."))||Number.isInteger(parseInt(value))){
+      answer.push(value)
+    }
+    document.getElementById("calculator_output").innerHTML = answer.join("")
   }else{
     switch(value){
       case "AC":
-        console.log("case AC: " + document.getElementById("calculator_output").value)
-        answer = ""
-        document.getElementById("calculator_output").innerHTML = answer.toString()
+        answer = []
+        document.getElementById("calculator_output").innerHTML = answer.join("")
         break  
       case "√":
-        answer = Math.sqrt(answer)
-        document.getElementById("calculator_output").innerText = answer.toString()
-        answer =""
+        //Special character
+        temp = calcSquareRoot()
+        document.getElementById("calculator_output").innerText = temp
+        answer =[]
+        if(temp !== "NaN"){
+          answer.push(temp)
+        }
         break   
       case "%":
-        answer = answer/100
-        document.getElementById("calculator_output").innerText = answer.toString()
-        answer =""
+        //Special character
+        temp = calcPercentage()
+        document.getElementById("calculator_output").innerText = temp
+        answer =[]
+        if(temp !== "NaN"){
+          answer.push(temp)
+        }
         break
       case "÷":
-        answer += "÷"
-        document.getElementById("calculator_output").innerText = answer.toString()
+        //Special character
+        answer.push("/")
+        document.getElementById("calculator_output").innerText = answer.join("")
         break
       case "CE":
-        answer = "0"
-        document.getElementById("calculator_output").innerText = answer.toString()
+        answer = []
+        answer.push("0")
+        document.getElementById("calculator_output").innerText = answer.join("")
+        answer = []
         break 
       case "x":
-        answer += "*"
-        document.getElementById("calculator_output").innerText = answer.toString()
+        //Special character
+        answer.push("*")
+        document.getElementById("calculator_output").innerText = answer.join("")
         break 
       case "-":
-        answer += "-"
-        document.getElementById("calculator_output").innerText = answer.toString()
+        answer.push("-")
+        document.getElementById("calculator_output").innerText = answer.join("")
         break  
       case "+":
-        answer += "+"
-        console.log("case + : " + answer)
-        document.getElementById("calculator_output").innerText = answer.toString()
+        answer.push("+")
+        document.getElementById("calculator_output").innerText = answer.join("")
         break
       case "=":
-        document.getElementById("calculator_output").innerText = assessAnswer()
-        answer = ""
+        temp = assessAnswer()
+        document.getElementById("calculator_output").innerText = temp
+        answer = []
+        if(temp !== "NaN"){
+          answer.push(temp)
+        }
         break     
     }
   } 
 }
-function assessAnswer(){
-  if(answer.charAt(0) === "."){
-    answer = "0"+answer
-    console.log("assessAnswer() answer: "+ answer)
-    assessAnswer()
-  } else if(!isNaN(eval(answer))){
-    return eval(answer)
+/*
+# Check if first and last numbers in the answer array are numbers 
+*/
+function firstInArrayIsNumber(){
+  if (answer.length == 0 || answer === undefined || isNaN(Number(answer[0]))){
+    return false
   }else
+  return true  
+}
+function lastInArrayIsNumber(){
+  if (answer.length == 0 || answer === undefined || isNaN(Number(answer[answer.length-1]))){
+    return false
+  }else 
+  return true  
+}
+/*
+# Calculate square root of number 
+*/
+function calcSquareRoot(){
+  if (!firstInArrayIsNumber()){
+    array = []
+    return "NaN"
+  }else if (!isNaN(Math.sqrt(answer.join("")))){
+    return Math.sqrt(answer.join(""))
+  }else 
+    array = []
+    return "NaN"
+}
+/*
+# Calculate percentage of number 
+*/
+function calcPercentage(){
+  if(!firstInArrayIsNumber()){
+    array = []
+    return "NaN"
+  }else if(!isNaN(answer.join("")/100)){
+    return answer.join("")/100
+  }else 
+    array = []
+    return "NaN"  
+}
+/*
+# Calculate answer 
+*/
+function assessAnswer(){
+  var expression = answer.join("")
+  if(answer.join("").charAt(0) === "."){
+    answer.unshift("0")
+  }
+  if(firstInArrayIsNumber() && lastInArrayIsNumber()){
+    if(!isNaN(eval(expression)) && eval(expression) !== undefined){
+      if(!isNaN(Number(answer.join("")))){
+        return answer.join("")
+      }
+      return eval(expression)
+    }else
+    array = []
+    return "NaN"
+  }else
+    array = []
     return "NaN"
 }

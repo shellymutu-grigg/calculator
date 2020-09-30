@@ -1,27 +1,22 @@
 /* 
-//CSS
-//Import the necessary stylesheets
-//Define the necessary colours
-//Define body & html properties
-//Define .calculator class
-//Define p ids to define title & tagline
-//Define text input
-//Define buttons
-//Define .ctrl class
-//Define .tall class 
+# CSS
+# Define the necessary colours
+# Define body & html properties
+# Define relevant .calculator classes properties
+# Define buttons properties 
 */
 .calculator_body { 
   display: grid; 
   padding: 2vw 2vw;
-  margin: 5vw 25vw 25vw 20vw;
+  margin: 5vw 20vw 0 30vw;
   border-radius: 10%;
   border-style: outset;
   background-color: #fdf6df;
+  width: 35vw;
 } 
 .calculator_title { 
   display: inline-block;
   position: relative; 
-  font-size:  3vw;
   line-height: 2vw;
   height: 2vw;
   grid-template-rows: 50px 1fr;
@@ -31,6 +26,10 @@
   margin-bottom: 2vw;
   margin-top: 2vw;
   top: 0px;
+  text-transform: uppercase;
+  color: rgb(109, 105, 105);
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 5em;
 }
 .calculator_output { 
   border-style: inset;
@@ -58,6 +57,7 @@
   border-radius: 15%;
   font-size: 2vw;
   min-height: 2vw;
+  color: rgb(77, 73, 73);
 }
 .add_red{
   background-color: lightcoral;
